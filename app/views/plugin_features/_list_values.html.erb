@@ -1,0 +1,46 @@
+<% 
+	options ||= Hash.new
+	options[:show_controls] = true if options[:show_controls].nil? 
+	options[:truncate_length] = 255 if options[:truncate_length].nil? 
+	options[:only_listed] = false if options[:only_listed].nil? # show only listed features 
+%>
+<table cellpadding=0 cellspacing=0 style="width:auto">
+	<% for feature_value in feature_values %>
+			<% feature = feature_value.plugin_feature %>
+			<% if !feature.nil? %>
+				<% if ((options[:only_listed] && feature.listed) || !options[:only_listed]) && feature.visible_for_category?(feature_value.item.category) %>
+					<tr>
+						<td style="text-align:left;white-space: nowrap;">
+								<% if item.is_editable_for_user?(@logged_in_user) && options[:show_controls]  %>
+									<span class="" >									
+							 			<%= raw "<img src=\"/themes/#{@setting[:theme]}/images/icons/approved.png\" title=\"#{t("single.approved")}\" class=\"icon\">" if feature_value.is_approved? %> 										
+							 			<%= raw "<img src=\"/themes/#{@setting[:theme]}/images/icons/unapproved.png\" title=\"#{t("single.not")} #{t("single.approved")}\" class=\"icon\">" if !feature_value.is_approved? %> 																							
+										<%= link_to raw("<img src=\"/themes/#{@setting[:theme]}/images/icons/cycle.png\" class=\"icon\">"), {:action => "change_approval", :id => item.id, :feature_value_id => feature_value.id, :controller => "plugin_features"}, :confirm => t("confirm.general"), :title => "#{t("label.item_change", :item => "")}", :class => "transparent" %>										
+									</span>												
+								<% end %>
+								<%= feature_icon feature %>
+								<%= feature.name %>:
+						</td>
+						<td style="text-align:left;padding-left:10px;">
+								<span id="feature_value_<%= feature_value.id %>">
+									<b>
+										<% if !feature_value.url.nil? && feature_value.url != "" %>
+											<a href="<%= h feature_value.url %>" target="_blank">
+										<% end  %>										
+											<% if feature_value.plugin_feature.feature_type == "stars" %>
+												<%= score(:type => "Stars", :value => feature_value.value.to_i,  :max => feature_value.plugin_feature.max) %>
+											<% else %>
+												<%= h truncate(feature_value.value, :length => options[:truncate_length]) %>
+											<% end %>										
+										<% if !feature_value.url.nil? && feature_value.url != "" %>
+											</a>
+										<% end  %>
+									</b>
+								</span>																																
+						</td>										
+					</tr>
+				<% end %>
+			<% end %>
+	<% end %>
+</table>
+

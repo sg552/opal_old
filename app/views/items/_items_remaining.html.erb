@@ -1,0 +1,10 @@
+<% items_remaining = @logged_in_user.items_remaining %>
+<% if !items_remaining.nil? && items_remaining > 0 %>
+	<div>
+		<h3 class="title">
+			<%= icon("items") %>
+			<%= t("label.items_remaining", :items => Item.model_name.human(:count => :other), :count => items_remaining) %> 
+		</h3>
+		<hr />
+	</div>
+<% end %>	

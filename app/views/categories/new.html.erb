@@ -1,0 +1,16 @@
+<div align=center>    
+	<h2><%= t("label.item_new", :item => Category.model_name.human) %></h2><br>
+</div>
+    <% form_for(@category, :url => { :action => 'create', :controller => "categories"}, :method => "post") do |f| %>
+		<%= render :partial => "form", :locals => {:category => @category, :f => f } %>
+		<br>
+		<div align=center>	
+			<%= f.submit t("label.item_create", :item => Category.model_name.human), :class => "button_1" %>
+		</div>
+   <% end %>
+   <br>
+<br>
+<div align=center>
+
+	<%= link_to icon("arrow_left") + " " + t("single.back"), :back %>
+</div>

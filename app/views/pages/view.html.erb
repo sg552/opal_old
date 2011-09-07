@@ -1,0 +1,43 @@
+<% subpages = Page.all.for_page(@page).display_in_menu.published.in_order %>
+<% if subpages.size > 0 %>
+	<div id="side">
+		<% if params[:controller] == "blog" %>
+			<%= render :partial => "blog/menu" %>
+		<% else %>
+				<%= render :partial => "menu_for_page", :locals => {:page => @page, :subpages => subpages}  %>				
+		<% end %>
+	</div>
+	<div id="main">	
+<% end %>	   
+	   <div class="page">
+	   		<%= render :partial => "pages/header", :locals => {:page => @page} %>
+			<%= show_page(@page) %>
+	   
+	   		<%# Handle Special Pages %>
+			<%= render :partial => "pages/template_contact_us" if @page.name == "contact_us" %>
+	   </div>
+	   
+	   <% if !@page.is_system_page? %>
+	   		<% if Setting.get_setting_bool("allow_page_comments") %>
+		   		<% if @comments.size > 0 %>
+					<div class="box_2">
+						<h2 class="title"><%= @comments.size %> <%= PageComment.model_name.human(:count => :other) %></h2>	
+						<%= page_entries_info @comments, :entry_name => PageComment.model_name.human %>									
+						<%= render :partial =>  "pages/list_page_comments", :locals => {:comments => @comments}  %>
+						<div align=center><%= will_paginate @comments %></div>																   			
+					</div>												   			
+				<% end %>
+				<% if !@page.locked %>
+				 <div class="box_2">
+				 	<h3 class="title"><%= t("label.item_new", :item => PageComment.model_name.human) %></h3>			
+						<%= form_tag  :action => 'create_page_comment', :controller => "pages", :id => @page.id  %>
+						   	<%= render :partial =>  "pages/page_comment_form" %>
+							<input type="submit" value="<%= t("label.item_create", :item => PageComment.model_name.human) %>" class="button_1">
+						</form>
+				 </div>		
+				<% end %>			
+			<% end %>
+	   <% end %>  
+<% if subpages.size > 0 %>
+	</div>
+<% end %>

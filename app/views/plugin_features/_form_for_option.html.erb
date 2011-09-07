@@ -1,0 +1,14 @@
+<%= f.error_messages %>
+<div class="field">
+	<h3><%= f.label :value %></h3>
+	<!--<i>What a user will select for <%= option.plugin_feature.name %>.</i>-->
+	<%= f.text_field :value %>		
+</div>
+
+<div class="field">	
+	<h3><%= f.label :description, t("single.description") %></h3>
+	<!--<i>A short message describing this option.</i>-->
+	<%= f.text_field :description %>	
+</div>
+
+

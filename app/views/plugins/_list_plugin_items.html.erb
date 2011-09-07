@@ -1,0 +1,41 @@
+<%# plugin items are passed in via a hash called plugin_items, indexed by plugin id, ie: plugin_items[plugin.id] %>
+<% if plugin_items == 0 %>
+	<%= t("label.items_none_added", :items => Plugin.model_name.human(:count => :other)) %>
+<% else %>
+	<% for plugin in plugins_to_look_for %>
+		<% if plugin.name != "Feature" && plugin.name != "FeatureValue" %> 			
+			<% if plugin_items[plugin.id].size > 0 %>
+				<h3><b><%= plugin.model_name.human(:count => :other) %></b></h3>		
+				<div class="indent">
+					<% for plugin_item in plugin_items[plugin.id] %>
+						<table cellpadding=0 cellspacing=0 style="width:100%">
+							<tr>
+								<td style="width:20px;">
+									<% if plugin_item.user %>
+										<% user = plugin_item.user %>
+										<%= link_to user_avatar(user, :size => "tiny"), {:action => "user", :controller => "browse", :user_id => user}  %>													
+									<% else %>
+										<img src="/themes/<%= @setting[:theme] %>/images/default_avatar.png" class="avatar_tiny" title="<%= t("single.anonymous") %>">
+									<% end %>								
+								</td>
+								<td align=left style="padding:2px;">
+									<%= link_to h("#{plugin.model_name.human}"), {:action => "view", :controller => "items", :id => plugin_item.item, :anchor => plugin.model_name.human}  %>
+									<%= t("single.for").downcase %>
+									<%= link_to h("#{plugin_item.item.name}"), {:action => "view", :controller => "items", :id => plugin_item.item}  %>
+									<div class="indent">
+										<i>
+											<% if plugin_item.user %>
+												<%= t("single.by") %> <b><%= link_to user.username, {:action => "user", :controller => "browse", :id => user} %></b> -
+											<% end %> 										
+											<%= friendly_date plugin_item.created_at %>
+										</i>
+									</div>
+								</td>
+							</tr>
+						</table>
+					<% end %>						
+				</div>
+			<% end %>
+		<% end %>					
+	<% end %>	
+<% end %>	

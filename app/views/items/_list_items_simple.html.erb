@@ -1,0 +1,49 @@
+<%# Grab Plugins to Display %>
+<% other_plugins = Plugin.find(:all, :conditions => ["is_builtin = '0'"], :order => "order_number ASC")%>
+
+<% for item in items %>
+ <% if item.is_viewable_for_user?(@logged_in_user) %>
+	<div class="item_box_simple">
+		<div class="item">
+			<table cellpadding=0 cellspacing=0 style="width:100%">
+				<tr>
+					<td class="thumbnail preview">
+						<div class="thumbnail preview" >
+							<%= preview(item) %>
+						</div>						
+					</td>			
+					<td class="details">
+						<table style="width:100%" cellpadding=0 cellspacing=0>
+							<tr>
+								<td align=left>
+									<div class="name">
+										<%= link_to "#{h truncate(item.name,  :length => 35)}", {:action => "view", :controller => "items", :id => item }, :title => "#{h item.name}" %>										
+									</div>
+								</td>
+								<td align=right>
+									<div style="position:relative;bottom:0px;left:0px;">
+										<%= raw "<b class=\"highlight\"><sup title=\"#{t("label.item_recently_added", :item => Item.model_name.human)}\">#{t("single.new")}</sup></b>" if item.is_new? %>
+										<!--
+										<%= icon("bullet") %>
+										<sup><a href="javascript:toggle_box('details_<%= item.id%>')"> Details <%= icon("open") %></a></sup>
+										-->
+									</div>
+								</td>
+							</tr>
+						</table>
+	
+						<% if get_setting_bool("enable_item_description") %>
+							<div class="description">
+								<span title="<%= h item.description %>">
+									<%= h truncate(item.description, :length => 245) %>
+								</span>
+							</div>
+						<% end %>															
+					</td>
+				</tr>
+			</table>			
+		</div>
+	</div>					
+ <% end %>
+<% end %>
+

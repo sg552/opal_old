@@ -1,0 +1,23 @@
+<% if feature.plugin_feature_value_options.size > 0 %>
+	<div class="box_x">
+			<% for option in feature.plugin_feature_value_options %>
+				<table style="width:100%">						
+						<tr>
+							<td align=left>
+								<h3><%= option.value %></h3>
+								<%= option.description unless option.description.blank? %>	
+							</td>
+							<td align=right>
+								<%= link_to icon("delete"), { :action => 'delete_option', :controller => "plugin_features", :id => option.id}, :confirm =>  t("confirm.general") %>										
+							</td>
+						</tr>
+		   		</table>
+				<div class="spacer"></div>								
+			<% end %>				
+					
+	</div>
+<% else %>
+	<div align=center>
+		<%= t("label.items_none_added", :items => PluginFeatureValueOption.model_name.human(:count => :other)) %>
+	</div>
+<% end %>		

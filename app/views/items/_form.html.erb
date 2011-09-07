@@ -1,0 +1,95 @@
+<%= error_messages_for :item %>
+
+
+<% if defined?(@feature_errors) %>
+	<%= errors_for(@feature_errors) if @feature_errors.size > 0  %>
+<% end %>
+<div class="side">
+	<div class="box_2">
+		<div class="field">
+			<h3 class="title">
+				<%= icon("categories") %>
+				<%= Category.model_name.human %>
+			</h3>
+			<%= category_select_tag("item[category_id]", item.category_id)%>							
+		</div>
+	</div>
+</div>
+<div class="main">
+	<div class="box_2">
+		<div class="field">
+			<h3><%= f.label :name %></h3>
+			<%= f.text_field :name %>				
+		</div>
+
+		<div class="field">
+			<h3><%= f.label :description %></h3>
+			<%= f.text_area :description %>				
+		</div>				
+
+		<% if Plugin.plugins[:tag].is_enabled?   %>	
+			<div class="field">
+				<h3><%= icon("tag") %> <%= PluginTag.model_name.human(:count => :other) %></h3>
+				<%= tags_field_tag(item, :tags) %>
+				<%= t("label.tag_example") %>
+			</div>					
+		<% end %>
+
+		<% 	features = PluginFeature.find(:all, :order => "order_number ASC") %>
+		<% if Plugin.plugins[:feature].is_enabled? && (features.size > 0|| @logged_in_user.is_admin?)  %>
+				<% if features.size > 0 %>															
+					<%= render :partial => "plugin_features/form_for_item", :locals => {:item => item} %>	
+				<% else %>
+					<%= t("notice.items_not_found", :items => feature_plugin.model_name.human(:count => :other)) %>
+				<% end %>					
+		<% end %>
+
+		<hr />				
+		<%= link_to_function content_tag(:h3, link_to_function(raw("#{icon("dropdown")} #{t("single.advanced")} #{t("single.options")}"), "$('#advanced_options').toggle()"))  %>
+		<div id="advanced_options"  style="display:none;">
+			<br />									
+				<% if get_setting_bool("allow_private_items") %>
+					<div class="field">
+							<h3>
+								<%= f.check_box :is_public %>
+								<%= icon("public") %> 
+								<%= f.label :is_public %>
+							</h3>					
+							<%= content_tag(:span, Item.human_attribute_name(:is_public_description), :class => "description") %>			
+					</div>																				
+				<% end %>									
+				<% if @logged_in_user.is_admin? %>	
+					<div class="field">
+							<h3>
+								<%= f.check_box :is_approved %>
+								<%= icon("approved") %> 
+								<%= f.label :is_approved %>
+							</h3>					
+							<%= content_tag(:span, Item.human_attribute_name(:is_approved_description), :class => "description") %>			
+					</div>
+					<div class="field">
+							<h3>
+								<%= f.check_box :locked %>
+								<%= icon("locked") %> 
+								<%= f.label :locked %>
+							</h3>					
+							<%= content_tag(:span, Item.human_attribute_name(:locked_description), :class => "description") %>			
+					</div>
+					<div class="field">
+							<h3>
+								<%= f.check_box :featured %>
+								<%= icon("featured") %> 
+								<%= f.label :featured %>
+							</h3>					
+							<%= content_tag(:span, Item.human_attribute_name(:featured_description), :class => "description") %>			
+					</div>	
+					<div class="field">
+							<h3><%= icon("user") %> <%= label "item", "user_id" %></h3>								
+							<%= f.collection_select 'user_id', User.all, :id, :to_s %>
+					</div>		
+				<% end %>									
+		</div>
+	</div>				
+</div>
+<div style="clear:both"></div>
+

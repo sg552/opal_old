@@ -1,0 +1,57 @@
+# RVM
+.rvmrc
+
+# Rails
+.bundle
+.rspec
+*.log
+tmp/*
+#Gemfile
+#Gemfile.lock
+#db/schema.rb
+
+# Config Files
+config/database.yml
+config/email.yml
+config/setup_load_paths.rb
+config/deploy.rb
+
+# Application Specific Stuff
+config/locales/item.yml
+
+# Don't Include Rails or Gems
+vendor/rails
+vendor/bundle
+
+# Graphics
+*_master.png
+*.psd
+*.fla
+*.ai
+
+# Backups
+backup/
+*.bak
+
+# SQLite Databases
+db/*.sqlite3
+
+# Only Include Public Themes
+!public/themes/white_square/*
+!public/themes/fracture/*
+!public/themes/vault/*
+public/themes/*
+
+# Remove Any User-Uploaded Images or Files
+public/images/item_images/*
+public/images/uploaded_images/*
+public/images/avatars/*
+files/item_files/*
+
+# Remove any Opal Plugins
+vendor/plugins/opal_*
+vendor/plugins/plugin_*
+
+#Aptana project file
+.project
+

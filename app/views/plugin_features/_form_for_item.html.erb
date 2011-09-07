@@ -1,0 +1,60 @@
+<% 	features = PluginFeature.find(:all, :order => "order_number ASC") %>
+<% for feature in features %>
+		<% if feature.visible_for_category?(item.category) %>
+		<div class="field">
+			<input name="features[<%= feature.id %>][plugin_feature_id]" value="<%= feature.id %>" type="hidden">														   								
+			<h3>
+				<%= feature_icon feature %>
+				<%= feature.name %>
+				<%= icon("required") if feature.is_required %>								
+			</h3>
+			<%= content_tag(:div, feature.description, :class => "description") if feature.description.blank? %>										
+
+
+   				<% existing_value_for_item = PluginFeatureValue.find(:first, :conditions => ["plugin_feature_id = ? and item_id = ?", feature.id, item.id]) %>
+				<% 
+					if existing_value_for_item
+						value =  existing_value_for_item.value
+					else 
+						value = nil
+					end
+				%>
+				   				
+				<% if feature.feature_type == "option" %>
+					<select name="features[<%= feature.id %>][value]">
+						<option value="" SELECTED></option>
+		   				<% for option in feature.plugin_feature_value_options %>											
+							<option value="<%=  option.value %>" <%= "SELECTED" if value == option.value %>><%= truncate(option.value, :length => 35) %></option>
+						<% end %>												
+					</select>
+				<% elsif feature.feature_type == "date" %>
+					<input name="features[<%= feature.id %>][value]" type="date" id="feature_input_<%= feature.id %>" value="<%= h value %>" />					
+					<script type="text/javascript">
+						$(document).ready(function() {
+							$("#feature_input_<%= feature.id %>").dateinput();
+						});
+					</script>						
+				<% elsif feature.feature_type == "slider" %>
+					<%= slider_field_tag("features_#{feature.id}", :value, :value => value.to_i, :min => feature.min, :max => feature.max, :input_name => "features[#{feature.id}][value]") %>																																															
+				<% elsif feature.feature_type == "yesno" %>
+	   				<input name="features[<%= feature.id %>][value]" type="radio" id="feature_input_<%= feature.id %>"  value="<%= t("single.positive") %>" <%= "CHECKED" if value ==  t("single.positive")  %>> <%= t("single.positive") %>
+	   				<input name="features[<%= feature.id %>][value]" type="radio" id="feature_input_<%= feature.id %>"  value="<%= t("single.negative") %>" <%= "CHECKED" if value == t("single.negative") %>> <%= t("single.negative") %>
+	   				<input name="features[<%= feature.id %>][value]" type="radio" id="feature_input_<%= feature.id %>"  value="" <%= "CHECKED" if (value == "" || value == nil) %>> <%= t("single.none") %>
+				<% elsif feature.feature_type == "stars" %>
+					<%= star_field_tag("features_#{feature.id}", :value, :value => value.to_i, :max => feature.max, :input_name => "features[#{feature.id}][value]") %>																																												
+				<% else %>
+	   				<input name="features[<%= feature.id %>][value]" type="text" id="feature_input_<%= feature.id %>" value="<%= h value %>">								
+				<% end %>			
+
+				<a href="javascript:toggle_box('feature_value_link_box_<%= feature.id %>')" class="transparent" style="padding-left:2px;">
+					<img src="/themes/<%= @setting[:theme] %>/images/icons/link.png" class="icon"  title="<%= t("label.make_link") %>">					
+				</a>
+				
+
+				<div id="feature_value_link_box_<%= feature.id %>" style="display:none;margin-top:2px">					
+					<input name="features[<%= feature.id %>][url]" type="text" id="feature_url_<%= feature.id %>">								
+				</div>
+
+		</div>		
+	<% end %>
+<% end %>	

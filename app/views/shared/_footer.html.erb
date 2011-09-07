@@ -1,0 +1,13 @@
+
+	<%= @setting[:title] %></a> &copy; <%= Time.now.strftime("%Y")%>
+	<% if mobile_device? %>
+		<%= icon("spacer") %>		 
+		  <% if mobile_mode? %>
+		    <%= link_to t("single.full") + " " + t("single.website"), :mobile => 0 %>
+		  <% else %>
+		    <%= link_to t("single.mobile") + " " + t("single.website"), :mobile => 1 %>
+		  <% end %>
+	<% end %>	
+	<br />
+	<a href="http://www.hulihanapplications.com/projects/opal" class="transparent" target="_blank" title="Powered with <%= t("name") %> by Hulihan Applications"><img src="/images/opal_powered_small.png" border=0 alt="" title="" style="vertical-align:middle"></a>					
+

@@ -1,0 +1,58 @@
+<% if item.is_editable_for_user?(@logged_in_user) %>
+	<% discussions = PluginDiscussion.find(:all, :conditions => ["item_id = ?", item.id], :order => "created_at DESC" )%>
+<% else %>
+	<% discussions = PluginDiscussion.find(:all, :conditions => ["item_id = ? and is_approved = '1'", item.id], :order => "created_at DESC" )%>
+<% end %>	
+<div class="plugin_box">
+	<a name="<%= plugin.model_name.human(:count => :other) %>"></a>
+	<% if @logged_in_user.group.plugin_permissions[plugin.plugin_class.name].can_create? || item.is_user_owner?(@logged_in_user) || @logged_in_user.is_admin? %>
+		<div class="header title">
+			<table style="width:100%" cellpadding=0 cellspacing=0>
+				<tr>
+					<td align=left>
+						<h2 class="title"><%= discussions.size %> <%= plugin.model_name.human(:count => :other) %></h2>										
+					</td>
+					<td align=right>
+						<a href="javascript:toggle_box('new_discussion_box')" class="plugin_title_link">
+							<%= icon("new") %>
+							<%=  t("label.item_new", :item => plugin.model_name.human) %>
+						</a>					
+					</td>
+				</tr>
+			</table>				
+		</div>	
+		<div style="display:none" id="new_discussion_box" class="box_1">
+		      <h2><%=  t("label.item_new", :item => plugin.model_name.human) %></h2>
+			  	 <div>
+  					   <%= form_tag  :action => 'create', :controller => "plugin_discussions", :id => item.id %>
+								<img src="/themes/<%= @setting[:theme] %>/images/icons/discussion.png" class="icon">
+								<input name="discussion[title]" type="text" id="discussion_title" onfocus = "focus_input('discussion_title')" onblur = "blur_input('discussion_title')"> 
+					   			<%= PluginDiscussion.human_attribute_name(:title) %>									
+								<input name="discussion[description]" type="text" id="discussion_description" onfocus = "focus_input('discussion_description')" onblur = "blur_input('discussion_description')"> 
+					   			<%= PluginDiscussion.human_attribute_name(:description) %>
+								<%= submit_tag  t("label.item_create", :item => plugin.model_name.human), :class => "button_1" %>
+						</form>
+						<div style="margin-bottom:5px"></div>
+				 </div>
+				 <br>
+			 	 <div align="center">
+				   			<a href="javascript:toggle_box('new_discussion_box')"><%= icon("cancel") %></a>
+				 </div>
+		</div>
+
+	<% end %>
+
+
+
+	
+
+	<% if discussions.size > 0 %>
+		<div class="discussions">
+			<% for discussion in discussions %>
+				<%= render discussion %>
+			<% end %>
+		</div>
+	<% else %>
+		<%= t("label.items_none_added", :items => plugin.model_name.human(:count => :other)) %>
+	<% end %>
+</div>

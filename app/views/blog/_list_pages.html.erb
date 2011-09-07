@@ -1,0 +1,8 @@
+<% for page in @pages %>
+	<div class="box_2 blog_page page" style="margin-bottom:5px;">
+		<%= render :partial => "blog/list_page", :locals => {:page => page} %>
+		<div class="spacer"></div>
+			<%= icon("comments") %> 										
+			<%= link_to "#{page.page_comments.size} #{PageComment.model_name.human(:count => :other)}", {:action => "page", :controller => "pages", :id => page, :anchor => "comments"} %>
+	</div>
+<% end %>
