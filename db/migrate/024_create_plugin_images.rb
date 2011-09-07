@@ -14,15 +14,15 @@ class CreatePluginImages < ActiveRecord::Migration
     end
     
     # Create Images Folder
-    images_path = "#{Rails.root.to_s}/public/images/item_images"
-    FileUtils.mkdir_p(images_path) if !File.exist?(images_path) # remove the folder if it exists 
+#    images_path = "#{Rails.root.to_s}/public/images/item_images"
+#    FileUtils.mkdir_p(images_path) if !File.exist?(images_path) # remove the folder if it exists 
   end
 
   def self.down
     drop_table :plugin_images
     
     # Remove Images Folder
-    images_path = "#{Rails.root.to_s}/public/images/item_images"
-    FileUtils.rm_rf(images_path) if File.exist?(images_path) # remove the folder if it exists    
+#    images_path = "#{Rails.root.to_s}/public/images/item_images"
+#    FileUtils.rm_rf(images_path) if File.exist?(images_path) # remove the folder if it exists    
   end
 end
