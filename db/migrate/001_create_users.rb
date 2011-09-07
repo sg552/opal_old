@@ -20,14 +20,14 @@ class CreateUsers < ActiveRecord::Migration
     end
     
     # Make Avatar Folder
-    avatars_path = "#{Rails.root.to_s}/public/images/avatars"
-    FileUtils.mkdir_p(avatars_path) if !File.exist?(avatars_path) # create the tmp folder if it doesn't exist
+#    avatars_path = "#{Rails.root.to_s}/public/images/avatars"
+#    FileUtils.mkdir_p(avatars_path) if !File.exist?(avatars_path) # create the tmp folder if it doesn't exist
   end 
 
   def self.down
     # Remove Avatars Folder
-    avatars_path = "#{Rails.root.to_s}/public/images/avatars"
-    FileUtils.rm_rf(avatars_path) if File.exist?(avatars_path) # remove the folder if it exists    
+#    avatars_path = "#{Rails.root.to_s}/public/images/avatars"
+#    FileUtils.rm_rf(avatars_path) if File.exist?(avatars_path) # remove the folder if it exists    
     
     drop_table :users
     # clear out all avatars
