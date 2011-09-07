@@ -3,7 +3,7 @@ class CreateImages < ActiveRecord::Migration
   
   def self.up
     # Create Images Folder
-    FileUtils.mkdir_p(@images_path) if !File.exist?(@images_path) # remove the folder if it exists 
+  #  FileUtils.mkdir_p(@images_path) if !File.exist?(@images_path) # remove the folder if it exists 
     
     create_table :images do |t|
       t.column :item_id, :integer, :nil => false
@@ -21,7 +21,7 @@ class CreateImages < ActiveRecord::Migration
 
   def self.down
     # Remove Images Folder
-    FileUtils.rm_rf(@images_path) if File.exist?(@images_path) # remove the folder if it exists  
+ #   FileUtils.rm_rf(@images_path) if File.exist?(@images_path) # remove the folder if it exists  
     
     drop_table :images      
   end

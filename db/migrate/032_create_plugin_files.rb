@@ -13,8 +13,8 @@ class CreatePluginFiles < ActiveRecord::Migration
     end
     
     # Create Files Folder
-    files_path = "#{Rails.root.to_s}/files/item_files"
-    FileUtils.mkdir_p(files_path) if !File.exist?(files_path) # createthe folder if it doesn't exist
+#    files_path = "#{Rails.root.to_s}/files/item_files"
+#    FileUtils.mkdir_p(files_path) if !File.exist?(files_path) # createthe folder if it doesn't exist
     
   end
 
@@ -22,7 +22,7 @@ class CreatePluginFiles < ActiveRecord::Migration
     drop_table :plugin_files
     
     # Remove Files Folder
-    files_path = "#{Rails.root.to_s}/files/item_files"
-    FileUtils.rm_rf(files_path) if File.exist?(files_path) # remove the folder if it exists    
+#    files_path = "#{Rails.root.to_s}/files/item_files"
+#    FileUtils.rm_rf(files_path) if File.exist?(files_path) # remove the folder if it exists    
   end
 end
