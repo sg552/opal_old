@@ -16,7 +16,8 @@ gem "will_paginate", ">= 3.0.pre2"
 
 # Database Gems
 #gem "mysql2"
-gem 'sqlite3'
+#gem 'sqlite3'
+gem "pg"
 
 
 group :test do
