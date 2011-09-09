@@ -1,9 +1,9 @@
 Opal::Application.routes.draw do
 
   # The priority is based upon order of creation: first created -> highest priority.
-
+  if ENV["setup"].blank?
   @setting = Setting.global_settings
-
+  end
   #map.simple_captcha '/simple_captcha/:action', :controller => 'simple_captcha'
   #match '/simple_captcha/:action', :controller => 'simple_captcha'
 
@@ -15,10 +15,12 @@ Opal::Application.routes.draw do
   match '/verify/:id/:code', :controller => "user", :action => "verify"
   match '/page/:id', :controller => "pages", :action => "page"
 
+  if ENV["setup"].blank?
   if (Setting.get_setting('locale').to_s == 'en')
     match "/#{Item.model_name.human(:count => :other).downcase}(/:action(/:id(.:format)))", :controller => "items" # use plural item name in url for anything in the items controller 
   elsif (Setting.get_setting('locale').to_s == 'ru')
     match "/#{Russian.translit(Item.model_name.human(:count => :other)).downcase}(/:action(/:id(.:format))", :controller => "items" # Russian variant uses transliteration to avoid encoding troubles 
+  end
   end
 
   match '/blog/:year(/:month(/:day))',
