@@ -1,0 +1,976 @@
+# Schema: group by category(log, notice, etc.), use interpolation(ie: %{item}), anything from user perspective(ie: "My Account") should be labeled: user_account, all verbs must not use any tense(created_account = bad, create_account = good). 
+cn:
+  name: 蛋白石(Opal)
+  greeting: 你好，%{name}! #Hello %{name}! # call with t(:greeting, :name => "John")
+  # Seed data used in Installation
+  seeds: 
+    setting:
+      site_title: 我的Opal网站.# "My Opal Website"
+      site_description: 自由，开源的内容发布网站 "The Free, Open Source, Item Management System. List Anything!"
+    category:
+        uncategorized:
+          name: 未分类 #"Uncategorized"
+          description: 这里面的东东太棒了。# "Things that are just too cool to fit into one category."
+    page:
+      banner_top:
+        title: 顶部横幅 #"Banner Top"
+        description: 这里的内容会放在侧栏的顶部。适合放广告图片，或者 javascript. # "Any content added here will show at the top of your site. Useful for ad banners and javascript."
+        content: ""
+      banner_bottom:
+        title: 底部横幅 # "Banner Bottom"
+        description: 这里的内容会出现在侧栏底部 # "Any content added here will show at the bottom of your site. Useful for ad banners and javascript."
+        content: ""
+      terms_of_service:
+        title: "Terms of Service"
+        description: "The Terms of Service for new users."
+        content: "<h1>Terms of Service</h1>By joining this site, you agree not to add or submit any damaging or offensive content, including by not limited to: pornography, any malicious software or files, violent or hateful images, etc.<br><br>You also agree not to submit any content that is either stolen, plagiarized, or otherwise listed without the consent of the copyright holder."
+      new_item:
+        title: 新的产品 # "New Item"
+        description: "This page appears when a User is creating a new item."
+        content: ""
+      email_footer:
+        title: Email 签名 #"Email Footer"
+        description: "This appears at the bottom of any automated email."
+        content: "This is an automated email. Please do not reply."
+      home_page_sidebar:
+        title: 主页的侧栏 # "Home Page Sidebar"
+        description: "This page appears in the sidebar of the homepage."
+        content: "<div class=\"box_2\" style=\"margin-bottom:5px\">\r\n<h1 class=\"title\">Getting Started</h1>To get started, Log in with the username: <strong>admin</strong> and the password: <strong>admin. </strong>\r\n<br><br><h2 class=\"title\">First things First</h2>\r\n To start, you might want to change the name of the items you\'re going to be listing. To do this, log in to your account, Click on the <b>admin tab</b>, then the <b>configure tab</b>. Under the <b>Items subtab</b>, you can change the name of the items you\'re listing by changing the <b>Item Name</b> and <b>Plural Item Name</b> values.<br><br><h2 class=\"title\">Change this Section</h2>\r\n After you log in, Click on the <strong>admin Tab</strong>, then Click on the <strong>Pages Tab</strong>. In the <strong>System Pages Section</strong>, click on the edit icon next to the page: <span style=\"text-decoration: underline;\">Home Page Sidebar</span>. That's all there is to it!<br><br><h2 class=\"title\">Need Any More Help?</h2> If you need any more help with Opal, check out the <a href=\"http://www.hulihanapplications.com/projects/opal_guide\" onclick=\"window.open(&quot;http://dev.hulihanapplications.com/wiki/opal&quot;, &quot;&quot;, &quot;resizable=yes, location=no, width=400, height=640, menubar=no, status=no, scrollbars=yes&quot;); return false;\"><b>Opal User Guide</b></a> for help on using Opal.</div>"
+      website_top:
+        title: 网站的顶端内容 # "Website Top"
+        description: "Shown at the very very top of the website."
+        content: ""
+      website_bottom: 
+        title: 网站的顶端内容 #"Website Bottom"
+        description: "Shown at the very very bottom of the website."
+        content: ""
+      category_column:
+        title: 分类 #"Category Column"
+        description: "This page appears below the category menu."
+        content: ""
+      contact_us:
+        title: 联系我们 #"Contact Us"
+        description: "Get in touch with us."
+        content: "<div align=center style=\"margin-bottom:10px\">\r\n<h2 class=\"title\">Contact Us</h2><hr>Get in touch with us.</div>"
+      home:
+        title: 主页 #"Home"
+        description: "The Main Home Page."
+        content: "<div class=\"box_2\" style=\"margin-bottom:5px\">\r\n<h1 class=\"title\">Welcome!</h1>Welcome to Opal. First time using Opal? No problem. Start by reading the <b>Getting Started</b> section.<br><br><h2 class=\"title\">Change this Section</h2>\r\n After you log in, Click on the <strong>admin Tab</strong>, then Click on the <strong>Pages Tab</strong>. In the <strong>Public Pages Section</strong>, click on the edit icon next to the page: <span style=\"text-decoration: underline;\">Home</span>. That's all there is to it!</div>"
+      items:
+        title: 产品 #"Items"
+        description: ""
+        content: ""
+      blog:
+        title: 博客 #"Blog"
+        description: ""
+        content: ""                      
+    group:
+      users:
+        name: 普通用户 #"Regular Users"
+        description: "Regular Users that have signed up at your site."
+      admin:
+        name: 管理员 #"Admins"
+        description: "Supreme Masters. They can access and do anything."
+      public:
+        name: 访客 # "The Public"
+        description: "People visiting your site that aren't logged in."
+    user:
+      admin:
+        username: admin
+        first_name: Admin 
+        last_name: None
+        email: admin@test.com
+        password: admin
+  # Sample data
+  sample_data:
+    users:
+      test:
+        username: test
+        first_name: John 
+        last_name: Doe
+        email: test@test.com
+        password: test  
+      unverified:
+        username: unverified
+        first_name: Unverified
+        last_name: User
+        email: unverified@test.com
+        password: unverified  
+    messages:
+      read:
+        text: "Test message(read) to test from admin."
+      unread:
+        text: "Test message(unread) to test from admin."
+      reply:
+        text: "Test Message from Test to Admin."
+    items:
+      sample:
+        name: "Test Item A"
+        description: "This is a test description."
+      long_name:
+        name: "Test Item B(with a Really Really Really Really Really Long Name)."
+        description: "This is a test description. It is really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really long."
+      unapproved:
+        name: "Test Item C (Unapproved)"
+        description: "This is a test description. This item is neither approved nor Public."
+    plugins:
+      images:
+        sample:
+          description: "A sample image."
+      descriptions:
+        sample:
+          title: "A Wonderful Item!"
+          content: "This item is very wonderful.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tempus pellentesque nibh. Cras suscipit, arcu at porttitor porttitor, neque ligula aliquam metus, sit amet egestas velit nulla et eros. Sed ac erat eget eros pellentesque feugiat. Nunc sagittis dolor sit amet velit. Nulla quam. Donec ultrices lacus at risus. Sed in diam eget tortor sagittis congue. Sed vel odio. Integer bibendum purus in nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis neque dolor, posuere posuere, volutpat ultrices, sollicitudin elementum, nulla. Morbi interdum urna vitae purus. Suspendisse vitae quam eu diam hendrerit dictum. Maecenas dignissim, mi ut lacinia auctor, mauris sem porttitor lectus, vel consectetur nulla est non neque. Suspendisse hendrerit massa non nisl.<br><br>Cras tortor. Aenean sed tortor. Maecenas orci lectus, viverra nec, molestie nec, pharetra vitae, massa. Cras euismod vestibulum augue. Morbi viverra nisl in purus. Etiam rhoncus dignissim erat. Vivamus a lorem in metus molestie porta. Curabitur nibh. Cras mattis justo ac felis. Morbi commodo, nulla id eleifend eleifend, nisi ligula sollicitudin est, a interdum lorem massa in leo. Suspendisse sit amet enim id nunc feugiat feugiat. Ut euismod neque. Etiam convallis faucibus dui. Cras aliquam ligula eu mauris. Cras vestibulum neque vel nisl. In arcu risus, hendrerit ac, laoreet sit amet, blandit at, nisl. Ut elementum eleifend lectus.<br><br>Nunc molestie enim. Nulla nec diam. Maecenas vel mauris. Pellentesque sit amet sem ac metus egestas tempor. Integer nibh. Donec sed velit a justo posuere sodales. Vestibulum molestie porttitor metus. Ut eleifend enim a lacus. Aliquam pretium dignissim velit. Ut euismod eros nec justo. Mauris pharetra. Nunc imperdiet elementum dui. Nunc et urna. Mauris at odio."
+      features:
+        price:
+          name: "Price"
+          value: "$200.00 USD"
+        size:
+          name: "Size"
+          option_small: "Small"
+          option_medium: "Medium"
+          option_large: "Large"
+        date:
+          name: "Date"
+        rank:
+          name: "Rank"
+        score:
+          name: "Score"
+        is_this_awesome:
+          name: "Is this awesome?"
+      reviews:
+        sample:
+          text: "I really like this!"
+      comments:
+        sample:
+          text: "Thanks for sharing this with us!"
+      links:
+        sample:
+          title: "Item Website"
+      tags:
+        sample:
+          name: "Most Current"
+        cool:
+          name: "Cool"
+      discussions:
+        sample:
+          title: "Test Discussion"
+          description: "This is a test discussion. Feel free to delete this."
+          post: "This is a test post."
+      videos:
+        sample:
+          title: "Sample Video"
+          description: "This is a sample video"
+          code: '<div style="text-align: center;"><iframe width="560" height="349" src="http://www.youtube.com/embed/SIJsCy-LB0g" frameborder="0" allowfullscreen></iframe></div>' 
+    pages:
+      about:
+        title: "About"
+        description: "All about us."
+        content: "<div class=\"box_2\"><h1>What is Opal?</h1>Opal is a Ruby on Rails Item Management Application. Well, what kind of items can you <b>manage</b>? Anything! Bicycles, homes for sale, banana vendors, etc. can all be managed and organized by Opal.</div>"
+      more_about:
+        title: "More About Us"
+        description: ""
+        content: "Here's more info about us."
+      blog_post:
+        title: "First Post"
+        content: "This is the first blog post!"
+    categories:
+      uncategorized_child:
+        name: "Uncategorized Child"
+        description: "Things that are just too cool to fit into one category."
+      uncategorized_grand_child:
+        name: "Uncategorized GrandChild"
+        description: "Things that are just too cool to fit into one category."        
+  # Sections
+  section:
+    title: 
+      items: %{items}
+      forum: 论坛 # Forum
+      admin: 管理 # Administration
+      configure: 配置 # Configure    
+      my_account: 我的账户 #My Account    
+      my_settings: 我的个人设置 #My Settings   
+  # Single Words 
+  single:
+    ago: 之前 # Ago
+    by: 由 #By
+    admin: 管理 # Administration
+    cycle: Cycle
+    save: 保存 # Save
+    submit: 提交 #Submit
+    search: 搜索 #Search
+    cancel: 取消 #Cancel
+    delete: 删除 #Delete
+    edit: 编辑 #Edit
+    new: 新建 #New
+    create: 创建 #Create
+    sort: 排序 #Sort
+    view: 查看 #View
+    help: 帮助 #Help
+    deleted: 已删除 #Deleted
+    created: 已创建 #Created
+    updated: 已更新 #Updated
+    downloaded: 已下载 #Downloaded
+    download: 下载 #Download
+    upload: 上传 #Upload
+    warning: 警告 #Warning    
+    added: 已增加 #Added
+    language: 语言 #Language
+    locale: 地区 #Locale
+    anonymous: 匿名 #Anonymous
+    visitor: 访客 #Visitor
+    ip_address: IP地址 #IP Address
+    theme: 页面风格 #Theme
+    section: 段落 #Section
+    format: 格式 #Format
+    avatar: 头像 #Avatar
+    name: 名字 #Name 
+    description: 描述 #Description
+    archive: 存档 #Archive  
+    send: 发送 #Send
+    none: 空 #None
+    all: 所有 #All
+    back: 后退 #Back
+    time: 时间 #Time 
+    not: 不 #Not
+    private: 私人的 #Private
+    options: 选项 #Options
+    popular: 受欢迎的# Popular
+    all: 所有 #All
+    close: 关闭 #Close
+    open: 打开 #Open
+    from: 从 #From
+    to: 到 #To
+    reply: 回复 #Reply
+    sent: 发送 #Sent
+    details: 详情 #Details
+    positive: 是 #"Yes"
+    negative: 否 #"No"
+    notification: 通知 #Notification
+    approved: 已批准 #Approved
+    system: 系统 #System
+    public: 公共的 #Public
+    import: 导入 #Import
+    export: 导出 #Export
+    text: 文字 #Text
+    number: 数字 #Number
+    slider: 滑条 #Slider 
+    date: 日期 #Date     
+    stars: 关注 #Stars
+    grouped: 分组 Grouped
+    keyword: 关键字 #Keyword
+    required: 必须的 #Required
+    title: 标题 #Title
+    url: URL
+    enabled: 可用的 #Enabled
+    disabled: 禁止的 # Disabled
+    logo: Logo
+    preview: 预览 #Preview
+    version: 版本 #Version
+    website: 站点 #Website
+    install: 安装 #Install
+    uninstall: 卸载 #Uninstall
+    security: 安全性 #Secuarity
+    information: 信息 #Information
+    for: 为 #For
+    watermark: 水印 #Watermark
+    stamp: Stamp    
+    main: 主要的 #Main
+    or: 或者 #Or
+    mode: 模式 #Mode
+    effects: 效果 #Effects    
+    advanced: 高级 #Advanced 
+    mobile: 移动 #Mobile
+    full: 全部 Full   
+    rss: RSS
+    spacer: "" # Spacer icon doesn't require a title
+    done: 完成 #Done
+    default: 默认的 #Default
+    tools: 工具 #Tools
+    slideshow: Slideshow
+    start: 开始 #Start
+    approval: 审批 #Approval
+    single: 单个 #Single
+    multiple: 多个 #Multiple
+    cloud: Cloud
+  # Flash Messages & Notices
+  notice:
+    save_success: 保存成功！ #Your changes have been successfully saved!
+    save_failure: 保存失败。 #Your changes could not be saved!
+    item_save_success: 这个 %{item} 保存成功 #This %{item} has been saved!
+    item_save_failure: 这个 %{item} 保存失败 #This %{item} could not be saved.
+    item_create_success: %{item} 创建成功 # %{item} created!
+    item_create_failure: %{item} 创建失败 # %{item} could not be created.    
+    item_delete_success: %{item} 删除成功 #%{item} deleted!
+    item_delete_failure: %{item} 删除成功 #%{item} could not be deleted.
+    item_install_success: %{item} 安装成功 #%{item} installed!
+    item_install_failure: %{item} 安装失败 #This %{item} could not be installed. 
+    item_uninstall_success: %{item} 卸载成功 # %{item} uninstalled!
+    item_uninstall_failure: %{item} 卸载失败 #This %{item} could not be uninstalled.
+    item_approve_success: %{item} 已经通过了审批 # This %{item} has been approved. Thanks!
+    item_unapprove_success: %{item} 未能通过审批 # This %{item} has been marked as unapproved.
+    item_import_success: %{count} %{items} 已经被成功导入。#%{count} %{items} imported successfully.
+    item_forgot_to_select: 你忘记选择了 %{item} #You forgot to select the %{item}.
+    item_not_found: %{item} 未找到。#%{item} not found.
+    item_invalid: 对不起， %{item} 无效。 # Sorry, this %{item} is invalid.    
+    item_needs_approval: 该 %{item} 需要审批 # This %{item} still needs to be approved.
+    items_disabled: 对不起， %{items} 尚未生效 #Sorry, %{items} are not enabled.
+    items_cannot_add_any_more: 不能继续增加 %{items} 了 #You can't add any more %{items}.
+    items_not_found: 未找到 %{items} # No %{items} found.
+    items_forgot_to_select: 您尚未选择 %{items} #You didn't select any %{items}.
+    file_not_found: 文件未找到： %{file} #"File not found: %{file}"
+    not_visible: 你没有查看的权限 #Sorry, you're not allowed to see this.
+    invalid_email: email 格式不对 #Sorry, you entered an invalid email address.
+    invalid_permissions: 你权限不够。 #Sorry, you're not allowed to do this.
+    user_account_create_success: Your account has been created!    
+    user_account_create_failure: Your account could not be created.
+    user_account_needs_verification: Your account needs to be verified before you can log in. A verification email has been sent to you.
+    user_account_verify_success: Your account has been verified!<br>You can now log in. 
+    user_account_verify_failure: Your account could not be verified. 
+    user_account_recover_password_instructions:  Instructions to recover your password have been sent to your email account.                     
+    user_account_recover_password_success: Your password has been changed to %{new_password}. You should change your password immediately, as this is a temporary password.
+    user_account_recover_password_failure: Your password could not be recovered.
+    user_login_success: 欢迎~成功登陆~ #You have logged in successfully. Welcome! 
+    user_login_failure: 登陆失败 #Login failed, Sorry.    
+    user_logout_success: 成功退出系统~拜拜～～　#You have been logged out! Have a nice day.     
+    user_thanks: 谢谢你， %{name} #Thanks %{name}!   
+    user_thanks_for_voting: 谢谢投票, %{name} #Thanks for voting, %{name}!
+    user_not_logged_in: 您需要先登陆 #You must be logged in to do this.
+    contact_thanks: 谢谢，我们会第一时间联系你的~ #%{name}, Thanks for contacting us, %{name}. we'll try to get back to you shortly!
+    invalid_captcha: 验证码输入错误 #You entered the wrong verification code!
+    disabled: 对不起，已经失效 #Sorry, this is disabled.
+    account_not_verified: 对不起，你的账户尚未通过验证 #Sorry, Your account has not been verified yet!
+    account_disabled: 对不起，你的账户被禁用了 # Your account has been disabled.
+    failed_admin_access_attempt: You are not an admin! Your attempt to access this area has been logged.
+    association_loop_failure: A %{item} cannot belong to itself. That's crazy!
+    delete_own_group_failure: Sorry, you can't delete your own group.
+    search_results_left_blank: I don't know what to search for!
+    message_send_success: Your %{item} has been sent to %{to}. 
+    message_send_failure: Your %{item} %{to} could not be sent! 
+  # Logs 
+  log: # call with t(:failed_admin_access_attempt_user, :scope => [:log]) or t("log.failed_admin_access_attempt_user") 
+    item_create: "Created %{item}: %{name}"
+    item_save: "Made changes to %{item}: %{name}"
+    item_delete: "Deleted %{item}: %{name}"
+    item_install: "Installed %{item}: %{name}"
+    item_uninstall: "Uninstalled %{item}: %{name}"
+    item_enable: "Enabled %{item}: %{name}"
+    item_disable: "Disabled %{item}: %{name}"    
+    item_approve: "Approved %{item}: %{name}"
+    item_verify: "Verified %{item}: %{name}"
+    item_unapprove: "Unapproved %{item}: %{name}"
+    item_downloaded_by_user: "Downloaded %{item}: %{name}"
+    item_downloaded_by_visitor: "A visitor at %{ip} downloaded %{item}: %{name}"
+    item_voted_for: "Voted for %{item}: %{name}"
+    item_voted_against: "Voted against %{item}: %{name}"
+    item_recovered: Recovered %{item}.
+    item_email_sent: %{item} email sent to %{name}.    
+    user_account_item_save: Changed my %{item}.    
+    user_account_create: "Joined %{title}."
+    user_account_verify: "Verified my account."
+    items_imported: "%{count} %{items} imported."
+    failed_admin_access_attempt_visitor: Someone at %{ip} attempted to access the Admin Area. %{controller} - %{action}
+    failed_admin_access_attempt_user: %{username}(%{id}) attempted to access the Admin Area. %{controller} - %{action} 
+  # Email
+  email:
+    subject:
+      contact_us: "%{site_title}: Contact Us Message from %{from}" # "%{site_title}: Contact Us Message from %{from}"
+      item_new: "%{title}: New %{item} - %{name}"
+      item_new_from_user: "%{title}: New %{item} from %{from} - %{name}"
+      verification: "%{title}: Verification Required - %{name}"
+    message:
+      item_new: "At %{title}, there's a new %{item} in town: %{name}. Check it out their profile here: \n\n%{url}\n\n"    
+      item_new_from_user: "At %{title}, %{from} has created a new %{item}: %{name}\n\nCheck it out here:\n\n%{url}\n\n"   
+      new_message_from_user: "At %{title}, you've received a new message from %{from}:\n\n%{message}\n\nYou can reply to this message or read your other messages here:\n\n%{url}\n\n"
+      password_recovery: "At %{title}, A password recovery request has been made for your account: %{name}.\n\nTo recover your password, go to the following address:\n\n%{url}\n\nIf you didn't make this request, please disregard this email. Feel free to contact %{title} if you have any questions or concerns."  
+      verification: "In order to log in to your account(%{name}) at %{title}, you must first verify your account by clicking on this verification link:\n\n%{url}"
+  # Labels & Sentences
+  label:
+    create_account: 建立新账户 # Create New Account
+    password_mismatch: 密码错误 #Your passwords don't match!
+    username_available: 用户名可用 #This username is available!
+    username_taken: 用户名已经存在 #This username is taken! 
+    agree_to_tos: By Creating an Account, you agree to the 
+    logged_in_as: %{name}已登陆 #Logged in as %{name}  
+    item_create: 建立 %{item} #Create %{item}
+    item_edit: 编辑 %{item}# Edit %{item}
+    item_save: 保存 %{item}#Save %{item}
+    item_delete: 删除 %{item}#Delete %{item}
+    item_new: 新的 %{item}# New %{item}
+    item_my: My %{item}
+    item_select: Select %{item}
+    item_install: 安装 %{item} #Install %{item}
+    item_uninstall: 卸载 %{item} #Uninstall %{item}
+    item_new_child: New Child %{item}
+    item_send_to: Send %{item} to %{name}
+    item_change: Change %{item}
+    item_featured: Featured %{item}
+    item_view_items: 查看 View this %{item}'s %{items}.
+    item_recently_added: This %{item} was added within the last 3 days.
+    item_mark_as: 把%{item} 改成 %{name} Mark %{item} as %{name}
+    item_unknown: "Unknown %{item}: %{name}"
+    item_backup_success: %{item} backed up successfully!    
+    item_upvote: Vote for this %{item}.
+    item_downvote: Vote against this %{item}.
+    items_from: %{items} from %{name}
+    items_for: %{items} for %{name}
+    items_more: More %{items}
+    items_remaining: %{count} %{items} remaining
+    items_found: %{count} %{items} found
+    items_latest: Latest %{items}    
+    items_none_added: No %{items} have been added. 
+    user_greeting: Hello, %{name}.
+    user_by: by %{name}
+    user_welcome_to_admin: 欢迎来到管理后台 # Welcome to the Administration section, all powerful %{name}.
+    user_welcome_to_account:  Welcome to your account. Here you can add new %{items}, check your messages, and much more! 
+    search_results_for: 对 %{query}的搜索结果 # Search Results for %{query}    
+    apology: Whoops!
+    captcha: 验证码 #Verification Code
+    rss_feed: RSS Feed
+    search: 搜索 #Search
+    register: Register
+    register_message: Don't have an account? 
+    sort_asc: Currently sorted in ascending order.
+    sort_desc: Currently sorted in descending order. 
+    log_in: 登陆 #Log In
+    log_out: 退出 #Log Out
+    log_in_forgot_password: Forgot your password? No Problem!
+    log_in_forgot_password_message: Please enter your account's email address.
+    log_in_recover_password: Recover Password
+    log_in_redirect_message: Your original destination has been saved. Please log in to continue.			
+    check_all: Check All
+    additional_info: Additional Info
+    time_today: 今天 #Today
+    time_this_week: This Week    
+    time_this_month: This Month
+    time_this_year: This Year
+    time_any: Any Time
+    recently_added: Recently Added
+    approval_required: Approval Required
+    not_found: Not Found
+    zoom_in: View Full Size
+    toggle_editor: Turn Editor On/Off
+    csv: CSV (Comma Separated)
+    make_link: Make this a link.
+    out_of: out of
+    from_local: From your Computer
+    from_web: From the Web(URL)
+    image_effect_bw: "Monochrome(Black &amp; White)"
+    image_effect_sepia: Sepia
+    image_effect_rotate_90_cw: "Rotate 90&deg; Clockwise"
+    image_effect_rotate_90_ccw: "Rotate 90&deg; Counter-Clockwise"
+    image_effect_rotate_180: "Rotate 180&deg; Degrees"
+    image_effect_gaussian_blur: Gaussian Blur
+    image_effect_polaroid: Polaroid
+    image_effect_negate: Negate
+    image_effect_resize: Resize to %{width} x %{height} pixels
+    tag_example: "Example: cool, funny, weird"
+    check_for_updates: Check for Updates
+    installing: Installing...
+    login_as: "You may now log in with the following username and password: %{username} / %{password}"
+    skipping_prompt: "Skipping Prompt..."
+    remember_me: Remember Me
+    currently_logged_in: Currently Logged In 
+  # General Information 
+  info: 
+    delete_main_logo: Deleting your main logo will show the title of your site instead. 
+    html_allowed: "The following HTML elements are allowed here: %{elements}"
+    image_guidelines: All Images are monitored for appropriateness(no adult, explicit, offensive, or otherwise graphic images allowed). Also, all images will be scaled down to 100x100 pixels.
+  # Confirmations
+  confirm:
+    general: 你确定要这样做吗？ # Are you sure you want to do this?
+    delete: 你确定删除吗？ #Are you sure you want to delete this?
+    delete_user: Are you sure you want to delete this user? Everything this user has ever created will be deleted also! If you don't want this to happen, you could disable their account instead.
+    item_delete: Are you sure you want to delete this %{item}?
+    install_sample_data: "Install Sample Data? (Example Items, Categories, Users)"                  
+  activerecord:
+    # System Records/Objects
+    records: 
+      plugin:
+        image: 
+          description: Images for Items.
+        comment: 
+          description: Comments from Users or Visitors. Comments are small notes or feedback about an item.
+        file: 
+          description: Files uploaded for a particular item. Useful for Software, PDFs, Images, etc.
+        tag: 
+          description: Tags are like labels for an Item. This is another way to organize items besides by categories. All tags in the System are grouped together. You can add as many as you want.
+        feature:
+          description: "These are shared atttributes that an several items might have. For example: a house would have a feature called price."
+        description: 
+          description: Large Text Descriptions For Items.      
+        link: 
+          description: A link for an item. This can be a link to a page for more information about the item, a website, or a file location.
+        discussion: 
+          description: Allows multiple people to have discussions about an item.   
+        review:
+          description: Item Reviews from Users. Reviews have scores that are tallied up to rate the value of an item.
+        video:
+          description: Embed videos from any popular video hosting site like YouTube, Vimeo, etc.            
+      plugin_setting:   
+        slideshow_speed:
+          title: Slideshow Speed 
+          description: The speed of a slideshow, in milliseconds(ms). Default is 2500.
+        item_thumbnail_width:
+          title: Item Thumbnail Width         
+          description: This is the default width(in pixels) of the thumbnails that are generated.
+        item_thumbnail_height:
+          title: Item Thumbnail Height        
+          description: This is the default height(in pixels) of the thumbnails that are generated.
+        resize_item_images:
+          title: Resize New Images        
+          description: Enable this if you would like all the images that are added to images resized to a particular size(you can choose the size below).
+        item_image_width:
+          title: Default Image Width        
+          description: This is the width you want your images(in pixels) to be automatically resized to. 
+        item_image_height:
+          title: Default Image Height        
+          description: This is the height you want your images(in pixels) to be automatically resized to. 
+        login_required_for_download:
+          title: Require Login For Download        
+          description: If enabled, only users who are logged in can download files. Visitors cannot download anything.
+        log_downloads:
+          title: Log Downloads        
+          description: Log all downloads in the Item's activity log.
+        review_type:
+          title: Review Type        
+          description: This determines the type of scoring that used for items
+        score_min:
+          title: Minimum Score        
+          description: The minimum value that can be used in review scores. This is not used in star ratings.
+        score_max:
+          title: Maximum Score                 
+          description: The maximum value that can be used in review scores.      
+        video_display_mode:
+          title: Display Mode
+          description: How videos are displayed. 
+        tag_list_mode:
+          title: List Mode 
+          description: If cloud is selected, a tag cloud is displayed, which shows a list of tags and the popularity of each tag.                       
+      setting:       
+        site_title: 
+          title: Title of Your Site           
+          description: The Title of your Site. You would see this at the very top of your browser window.
+        site_description: 
+          title: Site Description
+          description: The description for your site. Used in the title of your page(at the top of your browswer) and for search engine submission.
+        site_keywords: 
+          title: Site Keywords              
+          description: The Keywords Metatag for your site. Used for search engine submission. Seperated by commas.
+        host:
+          title: Host
+          description: "The hostname/domain name of your website, used for email, rss, and other stuff. This can include a port number. Do not add http:// or https://. Examples: example.com or example.com:3000."        
+        locale: 
+          title: Locale
+          description: The default language and time zone used by Opal. Since users can also set their own locale, this applies to visitors and new users.
+        display_item_views: 
+          title: Display Number of Item Views        
+          description: Display the number of times an item has been viewed(visible on an item's page).
+        caching: 
+          title: Page Caching        
+          description: This allows item pages to be cached to speed up performance. A flat file is stored on the server that visitors will see, instead of having the server generate a dynamic page every time.
+        new_item_notification: 
+          title: Notify Admins of New Items          
+          description: If enabled, all admins will be sent an email when a new item is created.
+        section_blog:
+          title: Blog                 
+          description: Opal's Integrated Blog. If enabled, a blog link will show up in the main menu.
+        allow_item_list_type_changes:
+          title: Allow Item List Type Changes         
+          description: If enabled, this setting allows anyone(even the public) to change the Item list type that they see when visiting your Opal application. This only affects the visitor's browser.
+        allow_item_page_type_changes:
+          title: Allow Page Type Changes         
+          description: If enabled, this setting allows anyone(even the public) to change the page type for items that they're looking at. This only affects the visitor's browser.
+        include_child_category_items:
+          title: Include Child Category Items         
+          description: If enabled, all Child Category Items will be included in lists and number counts for the Parent Category. Enabling this creates a small performance drop.
+        max_items_per_user:
+          title: Maximum Items per User         
+          description: This specifies the maximum number of items a user can create. Set to 0 for unlimited.
+        email_verification_required: 
+          title: Email Verification Required for New Users        
+          description: If enabled, new users must click on an verification link that is sent to their email account before they can log in.
+        enable_item_description: 
+          title: Enable Item Description        
+          description: Enable/Disable Item Description from item details and lists of items.
+        display_featured_items:
+          title: Display Featured Items         
+          description: Display featured items on the homepage.
+        enable_navlinks: 
+          title: Enable NavLinks        
+          description: NavLinks are simple navigation links shown at the top of item and item list pages. They show information about which category an item or category is in, and more.
+        item_approval_required:
+          title: Approval Required         
+          description: Enable this if you want to approve items created by users before they can be seen by the public. All unapproved items can viewed in the admin section. If disabled, all items will become approved upon creation.
+        section_items: 
+          title: Items        
+          description: If enabled, Items will be displayed and a  link will be shown in the main menu. If disabled, Opal will no longer display any items.
+        allow_page_comments:
+          title: Allow Page Comments         
+          description: If enabled, people can leave comments for pages.
+        enable_item_date: 
+          title: Enable Item Date        
+          description: Enable/Disable Item Date from item details and lists of items. This shows the date that the item was created.
+        homepage_type: 
+          title: Homepage Type        
+          description: This is what is shown on your homepage.
+        allow_private_items: 
+          title: Allow Private Items        
+          description: If enabled, users can create private items that aren't visible to the public or other users. Only the owner of the item and admins can see private items. If disabled, all items will become public upon creation.
+        allow_user_registration: 
+          title: User Registration        
+          description: This specifies if users can register for a new account.
+        allow_public_access: 
+          title: Allow Public Access        
+          description: If disabled, users must log in to access the site or any items. If enabled, anyone can view the site and items normally.
+        item_page_type: 
+          title: Item Page Type        
+          description: This is the visual layout of %{item} pages.
+        let_users_create_items:
+          title: Let Users Create Items         
+          description: If disabled, regular users cannot create items... only admins can.
+        show_user_login: 
+          title: Display User Login        
+          description: This specifies if the user login box is visible on the top menu bar. If disabled, users can login at site.example.com/browse/login
+        opal_version: 
+          description: This is the current version you're running.
+        display_help_sections:
+          title: Display Help Sections         
+          description: Shows Help Sections in various parts of your site to help users and admins with Opal.
+        theme: 
+          title: Theme        
+          description: This is the visual theme for the entire system
+        display_popular_items: 
+          title: Display Most Popular Items            
+          description: Display the most popular items on the homepage.
+        users_can_delete_items: 
+          title: Let Users Delete Their Items        
+          description: This allows users to delete items that they've created. If disabled, only admins can delete items.
+        new_user_notification: 
+          title: Notify Admins of New Users        
+          description: If enabled, all admins will be sent an email when a new user registers.
+        list_type: 
+          title: List Type        
+          description: The visual layout of how your %{items} are listed.
+        items_per_page: 
+          title: Items Per Page        
+          description: This is the number of items to show per page.
+        main_logo:
+          title: Main Logo               
+        list_type_simple: 
+          title: Simple        
+          description: View %{items} in a simple format.
+        list_type_detailed: 
+          title: Detailed        
+          description: View %{items} in a detailed format.
+        list_type_photo: 
+          title: Photo        
+          description: View %{items} as thumbnails.
+        list_type_small: 
+          title: Small        
+          description: View %{items} in a table.
+        item_page_type_summarized: 
+          title: Summarized            
+          description: View %{item} details in a clean, summarized way.
+        item_page_type_expanded: 
+          title: Expanded        
+          description: View %{item} with expanded details.
+        item_page_type_tabs_horizontal: 
+          title: Tabs - Horizontal         
+          description:  View %{item} details in horizontal tabs.
+        item_page_type_tabs_vertical: 
+          title: Tabs - Vertical        
+          description: View %{item} details in vertical tabs.
+        item_page_type_accordion: 
+          title: Accordion                           
+          description: View %{item} details in an accordion.
+        default_preview_type:
+          title: Default Preview Plugin
+          description: If an item doesn't have a preview, the first created plugin item of this type will become its new preview.  
+    # ActiveRecord Models & Validations        
+    models:
+      user:
+        one: User 
+        other: Users        
+      user_info: Account Info
+      user_message: 
+        one: Message
+        other: Messages
+      user_verification: Verification Request
+      group:
+        one: Group
+        other: Groups
+      category:
+        one: Category
+        other: Categories
+      group_plugin_permission: 
+        one: Plugin Permission
+        other: Plugin Permissions         
+      item:
+        one: Item
+        other: Items
+      image:
+        one: Image
+        other: Images
+      log:
+        one: Activity
+        other: Activity
+      page:
+        one: Page
+        other: Pages
+      public_page: # psuedo model
+        one: Public Page
+        other: Public Pages 
+      system_page: # psuedo model
+        one: System Page
+        other: System Pages
+      blog_page:  # psuedo model
+        one: Blog Post
+        other: Blog Posts     
+      page_comment:
+        one: Comment
+        other: Comments
+      plugin:
+        one: Plugin
+        other: Plugins
+      plugin_comment:
+        one: Comment
+        other: Comments
+      plugin_discussion:
+        one: Discussion
+        other: Discussions
+      plugin_discussion_post:
+        one: Post
+        other: Posts
+      plugin_description:
+        one: Description
+        other: Descriptions
+      plugin_feature:
+        one: Feature
+        other: Features
+      plugin_feature_value:
+        one: Value
+        other: Values
+      plugin_feature_value_option:
+        one: Option
+        other: Options
+      plugin_file:
+        one: File
+        other: Files
+      plugin_image:
+        one: Image
+        other: Images
+      plugin_link:
+        one: Link
+        other: Links
+      plugin_review:
+        one: Review
+        other: Reviews
+      plugin_tag:
+        one: Tag
+        other: Tags
+      plugin_setting:
+        one: Setting
+        other: Settings
+      plugin_video:
+        one: Video
+        other: Videos
+      setting:
+        one: Setting
+        other: Settings
+    attributes:
+      user:
+        username: Username
+        password: Password
+        password_confirmation: Confirm Password
+        first_name: First Name
+        last_name: Last Name
+        email: Email Address
+        created_at: Joined
+        is_admin: Admin?
+        locale: Locale
+        current_login_at: Latest Login
+        current_login_ip: Latest Login IP Address
+        registered_ip: Registered IP Address
+        is_verified: Verified
+        last_request_at: Latest Activity
+      user_info:
+        location: My Location
+        description: More about Me
+        interests: My Interests
+        notify_of_new_messages: Notify me when someone sends me a message
+        notify_of_item_changes: Notify me when some adds something to one of my %{items} or changes one in any way.
+        forgot_password_code: Password Recovery Code
+        use_gravatar: Use Gravatar?
+      user_message:
+        read: Read
+        unread: Unread      
+      group:
+        name: Name
+        description: Description
+        created_at: Created
+        updated_at: Last Updated
+      group_plugin_permission:
+        can_read: Read
+        can_create: Create
+        can_update: Update
+        can_delete: Delete
+        requires_approval: These actions require approval from owner 
+      category:
+        name: Name
+        description: Description
+        category_id: Parent Category
+        created_at: Created
+        categories: Subcategories
+      plugin:
+        title: Title
+        name: Name
+        description: Description
+        order_number: Order
+        is_builtin: Built In?
+        created_at: Creation Date
+        updated_at: Last Updated
+      plugin_comment: 
+        anonymous_name: Name
+        anonymous_email: Email
+      plugin_feature:
+        listed: Listed
+        feature_type: Type
+        icon_url: Icon URL
+        min: Minimum Value(optional)
+        max: Maximum Value(optional)
+        search_type: Search Type
+        category_id_description: Only items that belong to this category(or one of its children) will display this.
+      item:
+        id: ID
+        name: Name
+        description: Description
+        views: 
+          one: View
+          other: Views
+        created_at: Created
+        updated_at: Updated
+        user_id: Added by
+        featured: Featured
+        featured_description: If featured, this will be given special attention and shown on the homepage.        
+        locked: Locked
+        locked_description: If locked, no more changes can be made to this.
+        is_public: Public
+        is_public_description: If this is public, it can be seen by others.
+        is_approved: Approved
+        is_approved_description: This must be approved to be seen by others.                
+      page: 
+        title: Title
+        description: Description
+        published: Published
+        page_id: Parent Page
+        created_at: Date Added
+        updated_at: Last Updated
+        user_id: Added by        
+        published_description: If this is published, it will be visible by others.        
+        redirect: Redirect to URL
+        locked_description: If locked, people cannot add comments to this.
+      page_comment:
+        anonymous_name: Name
+        anonymous_email: Email
+        comment: Comment
+      plugin_review:
+        review_score: Score
+        average: Average
+      plugin_image:
+        local_file: Local File 
+        remote_file: URL        
+    errors: # you can find the list of validation error keys here: http://guides.rubyonrails.org/i18n.html 
+      template: 
+        header: 
+          one: "There's 1 thing wrong with this %{model}." 
+          other: "Whoa, there's %{count} things wrong with this %{model}." 
+        body: "There were problems with the following things:" 
+      messages:
+        blank: can't be blank!     
+        confirmation: does not match confirmation!    
+        taken: is taken!
+        invalid: is in an invalid format!
+        too_short: is too short!
+        not_a_number: is not a number!
+        out_of_range: is out of range!
+        too_long: is too long!     
+        range: must be between %{min} and %{max}
+        items_cannot_add_more: "You can't add any more %{items}. "   
+        item_must_be_owner: You must be the owner of this %{item} to do this. 
+        invalid_file_extension: "is in the wrong format. Make sure the file ends in one of these: %{valid_extensions}"
+        unresponsive: "is not responding"      
+  # Locales
+  locales:
+    en: English
+    ru: Russian (русский)
+    cn: 汉语  （简体）
+  # Date & Times 
+  date:
+    formats:
+      # Use the strftime parameters for formats.
+      # When no format has been given, it uses default.
+      # You can provide other formats here if you like!
+      default: "%d-%m-%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"  
+      month_year: "%B %Y"          
+    day_names: [周日, 周一, 周二, 周三, 周四, 周五, 周六]# [Sunday,  Monday,  Tuesday,  Wednesday,  Thursday,  Friday,  Saturday]
+    abbr_day_names: [周日, 周一, 周二, 周三, 周四, 周五, 周六]#[Sun,  Mon,  Tue,  Wed,  Thu,  Fri,  Sat]
+      
+    # Don't forget the nil at the beginning; there's no such thing as a 0th month
+    month_names: [~, 一月, 二月, 三月, 四月, 五月, 六月, 七月, 八月, 九月, 十月, 十一月, 十二月] # [~,  January,  February,  March,  April,  May,  June,  July,  August,  September,  October,  November,  December]
+    abbr_month_names: [~, 一月, 二月, 三月, 四月, 五月, 六月, 七月, 八月, 九月, 十月, 十一月, 十二月] # [~,  Jan,  Feb,  Mar,  Apr,  May,  Jun,  Jul,  Aug,  Sep,  Oct,  Nov,  Dec]
+    # Used in date_select and datime_select.
+    order: [ :year, :month, :day ]     
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"   
+      short: "%b %d at %H:%M %p" 
+      long: "%b %d, %Y at %I:%M %p"
+      yesterday: "Yesterday at %I:%M %p"
+      weekday: "%a at %I:%M %p"
+    am: "am"
+    pm: "pm" 
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one: "less than 1 second"
+        other: "less than %{count} seconds"
+      x_seconds:
+        one: "1 second"
+        other: "%{count} seconds"
+      less_than_x_minutes:
+        one: "less than a minute"
+        other: "less than %{count} minutes"
+      x_minutes:
+        one: "1 minute"
+        other: "%{count} minutes"
+      about_x_hours:
+        one: "about 1 hour"
+        other: "about %{count} hours"
+      x_days:
+        one: "1 day"
+        other: "%{count} days"
+      about_x_months:
+        one: "about 1 month"
+        other: "about %{count} months"
+      x_months:
+        one: "1 month"
+        other: "%{count} months"
+      about_x_years:
+        one: "about 1 year"
+        other: "about %{count} years"
+      over_x_years:
+        one: "over 1 year"
+        other: "over %{count} years"
+      almost_x_years:
+        one: "almost 1 year"
+        other: "almost %{count} years"        
+  # i18n Stuff
+  i18n:
+    plural:
+      keys: # Actual Names/Descriptions of Pluralization Cases for your Language. Indexed by pluralization key(ie: one: Singular, other: Plural)
+        one: Singular
+        other: Plural           
